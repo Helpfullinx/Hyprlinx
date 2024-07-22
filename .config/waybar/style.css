@@ -1,0 +1,137 @@
+* {
+    background: transparent;
+    font-family: "Ubuntu Nerd Font";
+    min-height: 14px;
+}
+
+window#waybar {
+    padding: 5px;
+    border-bottom: 3px;
+    border-style:outset;
+    border-color: white;
+    color: white;
+}
+
+#window {
+    font-weight: bold;
+    font-family: "Ubuntu";
+    margin: 0px 20px;
+}
+
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode, #user {
+    min-height: 12px;
+    font-size: 9px;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 27px;
+    padding: 0px 7px;
+    margin: 15px 2px;
+}
+
+
+#workspaces {
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 27px;
+    margin: 10px 3px;
+}
+
+
+#workspaces button {
+    font-weight: bold;
+    font-size: 9px;
+    color: white;
+    border-style: solid;
+    border-radius: 27px;
+    border-color: white;
+    border-width: 2px;
+    padding: 0px 4px;
+    margin: 4px 4px;
+}
+
+#workspaces button.active {
+    animation-name: fadeIn;
+    animation-duration: 0.2s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        color: white;
+        border-color: white;
+        background-color: rgba(255,255,255,0);
+    }
+    100% {
+        color: rgb(21, 23, 27);
+        background-color: rgba(255,255,255,1);
+    }
+}
+
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+
+#clock {
+    font-weight: bold;
+}
+
+#battery {
+    background-color: mediumpurple;
+    color: darkslategray;
+}
+
+#battery icon {
+    color: red;
+}
+
+#battery.charging {
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#battery.warning:not(.charging) {
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu {
+}
+
+#memory {
+}
+
+#network {
+    background-color: greenyellow;
+    color: darkslategray;
+}
+
+#network.disconnected {
+    background: #f53c3c;
+}
+
+#pulseaudio {
+}
+
+#pulseaudio.muted {
+}
+
+#custom-spotify {
+    color: rgb(102, 220, 105);
+}
+
+#tray {
+}
+
+#user {
+    font-size: 12px;
+    background-color: transparent;
+}
