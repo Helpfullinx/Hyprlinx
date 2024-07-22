@@ -1,0 +1,26 @@
+#!/usr/bin/python3
+
+import os
+import sys
+
+
+def get_brightness_info():
+    return os.popen('brightnessctl get').read()
+
+
+brightness = int(get_brightness_info())
+
+try:
+    option = sys.argv[1]
+except:
+    option = None
+
+if brightness < 255 and option == "+":
+    os.system('brightnessctl set +5%')
+    adjusted_brightness = (int(get_brightness_info()) / 255) * 100
+    os.system(f'''notify-send --app-name="Current Brightness | {adjusted_brightness:0,.0f}%" "󰃠  +5" --expire-time=500 --replace-id=1 &''')
+
+if brightness > 0 and option == '-':
+    os.system('brightnessctl set 5%-')
+    adjusted_brightness =  (int(get_brightness_info()) / 255) * 100
+    os.system(f'''notify-send --app-name="Current Brightness | {adjusted_brightness:0,.0f}%" "󰃞  -5" --expire-time=500 --replace-id=1 &''')

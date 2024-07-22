@@ -1,0 +1,38 @@
+#!/usr/bin/python3
+
+import os
+import sys
+
+def get_audio_info():
+    return os.popen('wpctl get-volume @DEFAULT_AUDIO_SINK@').read().strip().split(" ")
+
+
+volume_percent = int(float(get_audio_info()[1]) * 100)
+
+try:
+    option = sys.argv[1]
+except:
+    option = None
+
+if volume_percent < 100 and option == "+":
+    os.system('wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+')
+    volume_percent = int(float(get_audio_info()[1]) * 100)
+    os.system(f'''notify-send --app-name="Current Volume | {volume_percent}%" "󰝝  5" --expire-time=500 --replace-id=1 &''')
+
+if option == '-':
+    os.system('wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-')
+    volume_percent = int(float(get_audio_info()[1]) * 100)
+    os.system(f'''notify-send --app-name="Current Volume | {volume_percent}%" "󰝞  5" --expire-time=500 --replace-id=1 &''')
+
+if option == '/':
+    try:
+        audio_info = get_audio_info()[2]
+    except:
+        audio_info = None
+    
+    os.system('wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle')
+    match (audio_info):
+        case '[MUTED]':
+            os.system('''notify-send --app-name="Unmuted" "󰕾" --expire-time=500 --replace-id=1 &''')
+        case _:
+            os.system('''notify-send --app-name="Muted" "󰖁" --expire-time=500 --replace-id=1 &''')
