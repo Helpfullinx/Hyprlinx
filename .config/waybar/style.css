@@ -6,7 +6,7 @@
 
 window#waybar {
     padding: 5px;
-    border-bottom: 3px;
+    /* border-bottom: 3px; */
     border-style:outset;
     border-color: white;
     color: white;

@@ -61,12 +61,13 @@
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
         "format-wifi": "({signalStrength}%) ",
         "format-ethernet": "󰈀",
+        "tooltip-format-ethernet": "{ipaddr}/{cidr} 󰈀",
         "format-disconnected": "⚠"
     },
     "pulseaudio": {
         //"scroll-step": 1,
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
+        "format": "{icon}",
+        "format-bluetooth": "{icon}",
         "format-muted": "󰖁",
         "format-icons": {
             "headphones": "",

@@ -1,5 +1,5 @@
 #!/bin/bash
-waybar -c $HOME/.config/waybar/config -s $HOME/.config/waybar/style.css
+waybar &
 
-swww-daemon
-swww img "$HOME/.config/hypr/wallpapers/1.png" --transition-type grow --transition-pos "$(hyprctl cursorpos)" --transition-duration 3
+swww-daemon &&
+swww img "$HOME/.config/hypr/wallpapers/4.gif" --transition-type grow --transition-pos "$(hyprctl cursorpos)" --transition-duration 3
