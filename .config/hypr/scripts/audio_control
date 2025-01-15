@@ -6,6 +6,8 @@ import sys
 def get_audio_info():
     return os.popen('wpctl get-volume @DEFAULT_AUDIO_SINK@').read().strip().split(" ")
 
+def get_mic_info():
+    return os.popen('wpctl get-volume @DEFAULT_AUDIO_SOURCE@').read().strip().split(" ")
 
 volume_percent = int(float(get_audio_info()[1]) * 100)
 
@@ -31,8 +33,23 @@ if option == '/':
         audio_info = None
     
     os.system('wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle')
+
     match (audio_info):
         case '[MUTED]':
             os.system('''notify-send --app-name="Unmuted" "󰕾" --expire-time=500 --replace-id=1 &''')
         case _:
             os.system('''notify-send --app-name="Muted" "󰖁" --expire-time=500 --replace-id=1 &''')
+
+if option == '.':
+    try:
+        mic_info = get_mic_info()[2]
+    except:
+        mic_info = None
+    
+    os.system('wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle')
+
+    match (mic_info):
+        case '[MUTED]':
+            os.system('''notify-send --app-name="Unmuted" "󰍬" --expire-time=500 --replace-id=1 &''')
+        case _:
+            os.system('''notify-send --app-name="Muted" "󰍭" --expire-time=500 --replace-id=1 &''')

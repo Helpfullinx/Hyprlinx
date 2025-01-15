@@ -6,9 +6,9 @@
     "height": 10, // Waybar height
     // "width": 1366, // Waybar width
     // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces", "hyprland/mode", "custom/spotify"],
+    "modules-left": ["hyprland/workspaces", "hyprland/mode"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["user", "pulseaudio", "network", "cpu", "memory", "battery", "tray", "clock"],
+    "modules-right": ["user", "pulseaudio", "backlight", /*"network",*/ "tray", "cpu", "clock", "battery", "custom/notifications"],
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,
@@ -24,7 +24,7 @@
             "8": "八",
             "9": "九",
             "10": "十",
-            "urgent": "",
+            "urgent": "󱈸",
             "focused": "",
             "default": ""
         }
@@ -32,18 +32,39 @@
     "hyprland/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
+    "custom/notifications": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+          "notification": "",
+          "none": "",
+          "dnd-notification": "",
+          "dnd-none": "",
+          "inhibited-notification": "",
+          "inhibited-none": "",
+          "dnd-inhibited-notification": "",
+          "dnd-inhibited-none": ""
+        },
+  
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
     "tray": {
         // "icon-size": 21,
-        "spacing": 10
+        "spacing": 10,
+        "show-passive-items": true
     },
     "clock": {
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% "
-    },
-    "memory": {
-        "format": "{}% "
+        "interval":1,
+        "format": "{icon0} {icon1} {icon2} {icon3}",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
     },
     "battery": {
         "bat": "BAT0",
@@ -59,10 +80,17 @@
     },
     "network": {
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
-        "format-wifi": "({signalStrength}%) ",
+        "format-wifi": "",
         "format-ethernet": "󰈀",
+        "tooltip-format-wifi": "{ipaddr}/{cidr}  ",
         "tooltip-format-ethernet": "{ipaddr}/{cidr} 󰈀",
         "format-disconnected": "⚠"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}",
+        "tooltip": "{percent}",
+        "format-icons": ["󰃞", "󰃟", "󰃝", "󰃠"]
     },
     "pulseaudio": {
         //"scroll-step": 1,
@@ -85,12 +113,5 @@
     "user": {
         "format": "{user}",
         "open-on-click": "true"
-    },
-    "custom/spotify": {
-        "format": " {}",
-        "max-length": 40,
-        "interval": 30, // Remove this if your script is endless and write in loop
-        "exec": "$HOME/.config/waybar/mediaplayer.sh 2> /dev/null", // Script in resources folder
-        "exec-if": "pgrep spotify"
     }
 }

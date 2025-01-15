@@ -1,57 +1,68 @@
 * {
     background: transparent;
-    font-family: "Ubuntu Nerd Font";
+    font-family: "GeistMono Nerd Font";
     min-height: 14px;
 }
 
 window#waybar {
     padding: 5px;
-    /* border-bottom: 3px; */
     border-style:outset;
     border-color: white;
     color: white;
 }
 
-#window {
-    font-weight: bold;
-    font-family: "Ubuntu";
-    margin: 0px 20px;
+#clock, #battery, #cpu, #network, #backlight, #pulseaudio, #tray, #mode, #user, #window, #custom-notifications {
+    min-height: 24px;
+    font-size: 18px;
+    background-color: rgba(127,127,127,0.5);
+    border-radius: 54px;
+    padding: 0px 14px;
+    margin: 15px 10px 15px 4px;
+    box-shadow: rgba(0, 0, 0, 0.5) 2 2 5 2px;
 }
 
-#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode, #user {
-    min-height: 12px;
-    font-size: 9px;
-    background-color: rgba(255,255,255,0.2);
-    border-radius: 27px;
-    padding: 0px 7px;
-    margin: 15px 2px;
+tooltip {
+    background: rgb(20, 21, 29);
+    border: 1px none;
+    border-radius: 10px;
+    padding: 10px;
 }
 
+tooltip label {
+    color: white;
+}
+
+window#waybar.empty #window {
+    background-color: transparent;
+}
 
 #workspaces {
-    background-color: rgba(255,255,255,0.2);
-    border-radius: 27px;
-    margin: 10px 3px;
+    background-color: rgba(127,127,127,0.5);
+    border-radius: 54px;
+    margin: 10px 6px 10px 6px;
+    box-shadow: rgba(0, 0, 0, 0.5) 2 2 5 2px;
 }
 
 
 #workspaces button {
     font-weight: bold;
-    font-size: 9px;
+    font-size: 18px;
     color: white;
     border-style: solid;
-    border-radius: 27px;
+    border-radius: 54px;
     border-color: white;
-    border-width: 2px;
-    padding: 0px 4px;
-    margin: 4px 4px;
+    border-width: 4px;
+    padding: 0px 8px;
+    margin: 8px 8px;
 }
 
 #workspaces button.active {
-    animation-name: fadeIn;
-    animation-duration: 0.2s;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
+    border-width: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    animation: fadeIn 0.5s ease-in-out normal, myAnim 10s ease-in-out infinite;
 }
 
 @keyframes fadeIn {
@@ -66,9 +77,34 @@ window#waybar {
     }
 }
 
+@keyframes myAnim {
+	0% {
+        background-color: rgba(255,255,255,1);
+        color: black;
+    }
+    25% {
+        color: white;
+    }
+	45% {
+        background-color: rgba(20, 21, 29, 1);
+    }
+    55% {
+        background-color: rgba(20, 21, 29, 1);
+        color: white;
+    }
+    90% {
+        color: black;
+    }
+    100% {
+        background-color: rgba(255,255,255,1);
+        color: black;
+
+    }
+}
+
 #mode {
     background: #64727D;
-    border-bottom: 3px solid white;
+    border-bottom: 6px solid white;
 }
 
 #clock {
@@ -76,8 +112,9 @@ window#waybar {
 }
 
 #battery {
-    background-color: mediumpurple;
-    color: darkslategray;
+    background-color: rgb(20, 21, 29);
+    color: rgb(255, 255, 255);
+    padding-right: 20px;
 }
 
 #battery icon {
@@ -85,6 +122,7 @@ window#waybar {
 }
 
 #battery.charging {
+    background-color: greenyellow;
 }
 
 @keyframes blink {
@@ -104,18 +142,22 @@ window#waybar {
 }
 
 #cpu {
-}
-
-#memory {
+    font-size: medium;
+    padding: 0px 18px;
 }
 
 #network {
     background-color: greenyellow;
     color: darkslategray;
+    padding-right: 22px;
 }
 
 #network.disconnected {
     background: #f53c3c;
+}
+
+#backlight {
+    padding-right: 19px;
 }
 
 #pulseaudio {
@@ -131,7 +173,22 @@ window#waybar {
 #tray {
 }
 
+#tray menu{
+    background-color: rgb(20, 21, 29);
+    border: none;
+    color: #ffffff;
+    padding: 10px;
+}
+
+#tray menu menuitem:hover {
+    background-color: black;
+    color: #ffffff;
+  }
+
 #user {
-    font-size: 12px;
-    background-color: transparent;
+    font-size: 24px;
+}
+
+#custom-notifications {
+    padding-right: 18px;
 }
